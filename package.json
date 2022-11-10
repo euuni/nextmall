@@ -9,16 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^1.0.6",
+    "bcr": "^1.0.0",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "heroicons-react": "^1.4.1",
     "js-cookie": "^3.0.1",
+    "mongoose": "^6.7.0",
     "next": "^12.3.1",
     "next-auth": "^4.10.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.38.0"
+    "react-hook-form": "^7.38.0",
+    "react-toastify": "^9.1.1",
+    "session": "^0.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
