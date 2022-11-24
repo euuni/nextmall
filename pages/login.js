@@ -11,7 +11,6 @@ export default function LoginScreen() {
   const { data: session } = useSession()
   const router = useRouter()
   const { redirect } = router.query
-
   useEffect(() => {
     if (session?.user) {
       router.push(redirect || "/")
@@ -38,13 +37,58 @@ export default function LoginScreen() {
       toast.error(getError(err))
     }
   }
+
+  const githubLoginHandler = async () => {
+    try {
+      const result = await signIn("github", {
+        redirect: false,
+      })
+      console.log("Github login:" + result)
+    } catch (err) {
+      toast.error(getError(err))
+    }
+  }
+
+  const googleLoginHandler = async () => {
+    try {
+      // eslient-disable-next-line no-unused-vars
+      const result = await signIn("google", {
+        redirect: false,
+      })
+    } catch (err) {
+      toast.error(getError(err))
+    }
+  }
+
+  const kakaoLoginHandler = async () => {
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const result = await signIn("kakao", {
+        redirect: false,
+      })
+    } catch (err) {
+      toast.error(getError(err))
+    }
+  }
+
+  const naverLoginHandler = async () => {
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const result = await signIn("naver", {
+        redirect: false,
+      })
+    } catch (err) {
+      toast.error(getError(err))
+    }
+  }
+
   return (
     <Layout title="Login">
       <form
         className="mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <h1 className="mb-4 text-xl">Login</h1>
+        <h1 className="mb-4 text-xl">Login </h1>
         <div className="mb-4">
           <label htmlFor="email">Email</label>
           <input
@@ -52,7 +96,7 @@ export default function LoginScreen() {
             {...register("email", {
               required: "Please enter email",
               pattern: {
-                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$/i,
+                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
                 message: "Please enter valid email",
               },
             })}
@@ -68,24 +112,62 @@ export default function LoginScreen() {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            {...register("passwoed", {
+            {...register("password", {
               required: "Please enter password",
-              minLength: { vaule: 3, message: "password is more than 3 chars" },
+              minLength: { value: 3, message: "password is more than 3 chars" },
             })}
             className="w-full"
-            id="passwoed"
+            id="password"
             autoFocus
           />
           {errors.password && (
-            <div className="text-red-500">{errors.password.message}</div>
+            <div className="text-red-500 ">{errors.password.message}</div>
           )}
         </div>
         <div className="mb-4">
-          <button className="primary-button">Login </button>
+          <button className="primary-button">Login</button>
         </div>
         <div className="mb-4">
           Don&apos;t have an account? &nbsp;
           <Link href="register">Register</Link>
+        </div>
+        <div className="p-5 bg-gray-500 rounded-lg">
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              type="button"
+              onClick={githubLoginHandler}
+            >
+              Github Login
+            </button>
+          </div>
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              type="button"
+              onClick={googleLoginHandler}
+            >
+              Google Login
+            </button>
+          </div>
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              type="button"
+              onClick={kakaoLoginHandler}
+            >
+              Kakao Login
+            </button>
+          </div>
+          <div className="">
+            <button
+              className="primary-button w-full"
+              type="button"
+              onClick={naverLoginHandler}
+            >
+              Naver Login
+            </button>
+          </div>
         </div>
       </form>
     </Layout>
