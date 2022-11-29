@@ -5,14 +5,11 @@ import Cookies from "js-cookie"
 import CheckoutWizard from "../components/CheckoutWizard"
 import Layout from "../components/Layout"
 import { Store } from "../utils/Store"
-
 export default function PaymentScreen() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("")
-
   const { state, dispatch } = useContext(Store)
   const { cart } = state
   const { shippingAddress, paymentMethod } = cart
-
   const router = useRouter()
 
   const submitHandler = (e) => {
@@ -34,7 +31,7 @@ export default function PaymentScreen() {
 
   useEffect(() => {
     if (!shippingAddress.address) {
-      return router.push("shipping")
+      return router.push("/shipping")
     }
     setSelectedPaymentMethod(paymentMethod || "")
   }, [paymentMethod, router, shippingAddress.address])
@@ -42,26 +39,23 @@ export default function PaymentScreen() {
   return (
     <Layout title="Payment Method">
       <CheckoutWizard activeStep={2} />
-      <form className="mx-auto max-w-screen-md" on Submit={submitHandler}>
+      <form className="mx-auto max-w-screen-md" onSubmit={submitHandler}>
         <h1 className="mb-4 text-xl">Payment Method</h1>
-        {["PayPal", "Stripe", "CashOnDelivery", "KakaoPay", "NaverPay"].map(
-          (payment) => (
-            <div key={payment} className="mb-4">
-              <input
-                name="paymentMethod"
-                className="p-2 outline-none focus:ring-0"
-                id={payment}
-                type="radio"
-                checked={selectedPaymentMethod === payment}
-                onChange={() => setSelectedPaymentMethod(payment)}
-              />
-
-              <label className="p-2" htmlFor={payment}>
-                {payment}
-              </label>
-            </div>
-          )
-        )}
+        {["PayPal", "Stripe", "CashOnDelivery", "Toss"].map((payment) => (
+          <div key={payment} className="mb-4">
+            <input
+              name="paymentMethod"
+              className="p-2 outline-none focus:ring-0"
+              id={payment}
+              type="radio"
+              checked={selectedPaymentMethod === payment}
+              onChange={() => setSelectedPaymentMethod(payment)}
+            />
+            <label className="p-2" htmlFor={payment}>
+              {payment}
+            </label>
+          </div>
+        ))}
         <div className="mb-4 flex justify-between">
           <button
             onClick={() => router.push("/shipping")}
@@ -76,4 +70,5 @@ export default function PaymentScreen() {
     </Layout>
   )
 }
+
 PaymentScreen.auth = true
