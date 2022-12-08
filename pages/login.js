@@ -37,21 +37,19 @@ export default function LoginScreen() {
       toast.error(getError(err))
     }
   }
-
   const githubLoginHandler = async () => {
     try {
       const result = await signIn("github", {
         redirect: false,
       })
-      console.log("Github login:" + result)
+      console.log("Github login: " + result)
     } catch (err) {
       toast.error(getError(err))
     }
   }
-
   const googleLoginHandler = async () => {
     try {
-      // eslient-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars
       const result = await signIn("google", {
         redirect: false,
       })
@@ -59,7 +57,6 @@ export default function LoginScreen() {
       toast.error(getError(err))
     }
   }
-
   const kakaoLoginHandler = async () => {
     try {
       // eslint-disable-next-line no-unused-vars
@@ -70,13 +67,11 @@ export default function LoginScreen() {
       toast.error(getError(err))
     }
   }
-
   const naverLoginHandler = async () => {
     try {
       // eslint-disable-next-line no-unused-vars
-      const result = await signIn("naver", {
-        redirect: false,
-      })
+      const result = await signIn("naver", { redirect: false })
+      console.log("Naver login:" + result)
     } catch (err) {
       toast.error(getError(err))
     }
@@ -128,8 +123,8 @@ export default function LoginScreen() {
           <button className="primary-button">Login</button>
         </div>
         <div className="mb-4">
-          Don&apos;t have an account? &nbsp;
-          <Link href="register">Register</Link>
+          &apos;У вас нет счета?&nbsp;
+          <Link href={`/register?redirect=${redirect || "/"}`}>Register</Link>
         </div>
         <div className="p-5 bg-gray-500 rounded-lg">
           <div className="mb-4">
@@ -167,10 +162,6 @@ export default function LoginScreen() {
             >
               Naver Login
             </button>
-          </div>
-          <div className="mb-4 ">
-            Don&apos;t have an account? &nbsp;
-            <Link href={`/register?redirect=${redirect || "/"}`}>Register</Link>
           </div>
         </div>
       </form>
