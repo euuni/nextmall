@@ -24,7 +24,8 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.36.0",
     "react-toastify": "^9.1.1",
-    "session": "^0.1.0"
+    "session": "^0.1.0",
+    "webpack-dev-server": "~2.7.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
